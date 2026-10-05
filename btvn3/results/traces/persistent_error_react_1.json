@@ -1,0 +1,245 @@
+{
+  "strategy": "react",
+  "scenario": "persistent_error",
+  "model": "mock",
+  "status": "LOOP_DETECTED",
+  "verified_booking": null,
+  "metrics": {
+    "model_calls": 4,
+    "tool_calls": 4,
+    "tool_attempts": 4,
+    "replans": 0,
+    "elapsed_ms": 14.289,
+    "input_tokens": null,
+    "output_tokens": null,
+    "usage_reported_calls": 0,
+    "cost_usd": null,
+    "constraint_violations": 0,
+    "unauthorized_actions": 0,
+    "approval_requests": 0,
+    "charges": 0
+  },
+  "handoff": {
+    "stop_reason": "LOOP_DETECTED",
+    "explanation": "Cùng hành động xuất hiện 3 lần, không có tiến triển: [\"check_seat\", {\"flight_id\": \"VN101\"}]",
+    "request": {
+      "origin": "SGN",
+      "destination": "DAD",
+      "depart_date": "2026-10-07",
+      "depart_before": "12:00:00",
+      "max_price": 2000000,
+      "auto_approval_limit": 1500000,
+      "approve_nonrefundable": true
+    },
+    "tried": [
+      {
+        "tool": "search_flights",
+        "args": {
+          "origin": "SGN",
+          "destination": "DAD",
+          "depart_date": "2026-10-07"
+        },
+        "status": "ok",
+        "error_code": null
+      },
+      {
+        "tool": "check_seat",
+        "args": {
+          "flight_id": "VN101"
+        },
+        "status": "error",
+        "error_code": "TIMEOUT"
+      },
+      {
+        "tool": "check_seat",
+        "args": {
+          "flight_id": "VN101"
+        },
+        "status": "error",
+        "error_code": "TIMEOUT"
+      },
+      {
+        "tool": "check_seat",
+        "args": {
+          "flight_id": "VN101"
+        },
+        "status": "error",
+        "error_code": "TIMEOUT"
+      }
+    ],
+    "bookings": {},
+    "charges": {},
+    "side_effects": [],
+    "pending_approval": null,
+    "question": "Nguồn dữ liệu đang lặp lỗi; bạn muốn đổi nguồn hay thử lại sau?"
+  },
+  "trace": [
+    {
+      "seq": 1,
+      "kind": "model",
+      "phase": "react",
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "search_flights",
+          "args": {
+            "origin": "SGN",
+            "destination": "DAD",
+            "depart_date": "2026-10-07"
+          },
+          "id": "call_1",
+          "type": "tool_call"
+        }
+      ],
+      "usage": null
+    },
+    {
+      "seq": 2,
+      "kind": "tool",
+      "tool": "search_flights",
+      "args": {
+        "origin": "SGN",
+        "destination": "DAD",
+        "depart_date": "2026-10-07"
+      },
+      "result": {
+        "status": "ok",
+        "flights": [
+          {
+            "flight_id": "VN101",
+            "origin": "SGN",
+            "destination": "DAD",
+            "depart_date": "2026-10-07",
+            "departure": "08:00:00",
+            "price": 1200000,
+            "seats": 2,
+            "refundable": true
+          },
+          {
+            "flight_id": "VJ202",
+            "origin": "SGN",
+            "destination": "DAD",
+            "depart_date": "2026-10-07",
+            "departure": "08:00:00",
+            "price": 1400000,
+            "seats": 2,
+            "refundable": true
+          }
+        ],
+        "complete": true
+      },
+      "executed": true
+    },
+    {
+      "seq": 3,
+      "kind": "model",
+      "phase": "react",
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "check_seat",
+          "args": {
+            "flight_id": "VN101"
+          },
+          "id": "call_2",
+          "type": "tool_call"
+        }
+      ],
+      "usage": null
+    },
+    {
+      "seq": 4,
+      "kind": "tool",
+      "tool": "check_seat",
+      "args": {
+        "flight_id": "VN101"
+      },
+      "result": {
+        "status": "error",
+        "error_code": "TIMEOUT",
+        "hint": "Có thể thử lại với số lần giới hạn.",
+        "retryable": true
+      },
+      "executed": true
+    },
+    {
+      "seq": 5,
+      "kind": "model",
+      "phase": "react",
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "check_seat",
+          "args": {
+            "flight_id": "VN101"
+          },
+          "id": "call_3",
+          "type": "tool_call"
+        }
+      ],
+      "usage": null
+    },
+    {
+      "seq": 6,
+      "kind": "tool",
+      "tool": "check_seat",
+      "args": {
+        "flight_id": "VN101"
+      },
+      "result": {
+        "status": "error",
+        "error_code": "TIMEOUT",
+        "hint": "Có thể thử lại với số lần giới hạn.",
+        "retryable": true
+      },
+      "executed": true
+    },
+    {
+      "seq": 7,
+      "kind": "model",
+      "phase": "react",
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "check_seat",
+          "args": {
+            "flight_id": "VN101"
+          },
+          "id": "call_4",
+          "type": "tool_call"
+        }
+      ],
+      "usage": null
+    },
+    {
+      "seq": 8,
+      "kind": "tool",
+      "tool": "check_seat",
+      "args": {
+        "flight_id": "VN101"
+      },
+      "result": {
+        "status": "error",
+        "error_code": "TIMEOUT",
+        "hint": "Có thể thử lại với số lần giới hạn.",
+        "retryable": true
+      },
+      "executed": true
+    },
+    {
+      "seq": 9,
+      "kind": "stop",
+      "status": "LOOP_DETECTED",
+      "reason": "Cùng hành động xuất hiện 3 lần, không có tiến triển: [\"check_seat\", {\"flight_id\": \"VN101\"}]"
+    }
+  ],
+  "trial": 1,
+  "evaluation": {
+    "feasible": false,
+    "verified_success": false,
+    "false_success": false,
+    "constraint_violations": 0,
+    "unauthorized_actions": 0,
+    "complete_handoff": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "origin": "SGN",
+  "destination": "DAD",
+  "depart_date": "2026-10-07",
+  "depart_before": "12:00:00",
+  "max_price": 2000000,
+  "auto_approval_limit": 1500000,
+  "approve_nonrefundable": true
+}
